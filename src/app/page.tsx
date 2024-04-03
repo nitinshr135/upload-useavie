@@ -1,12 +1,14 @@
 "use client";
-import { Button, Table } from "@radix-ui/themes";
+import { Button } from "@radix-ui/themes";
 import { upload } from "@vercel/blob/client";
-import { useEffect, useRef } from "react";
+import { useRef, useState } from "react";
 import { UploadIcon } from "@radix-ui/react-icons";
 import TableComponent from "./components/table-component";
-import { list } from "@vercel/blob";
 
 export default function Home() {
+  const [blobList, setBlobList] = useState<any>(null);
+  const [fetchBlobList, setfetchBlobList] = useState<boolean>(false);
+
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const handleUploadClick = () => {
@@ -24,25 +26,15 @@ export default function Home() {
         access: "public",
         handleUploadUrl: "/api/upload",
       });
-      console.log(newBlob);
+      setfetchBlobList(!fetchBlobList);
     }
   };
-
-  const getFileList = async () => {
-    const response = await list();
-    console.log("yee blob list --", response);
-  };
-
-  console.log("yee process env --", process.env.BLOB_READ_WRITE_TOKEN);
-
-  useEffect(() => {
-    getFileList();
-  }, []);
+  console.log("yee bloblist --", blobList);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center gap-24 p-24">
       <div className="w-full items-center justify-between font-mono text-sm lg:flex">
-        <div>Upload File</div>
+        <div className="text-2xl font-bold text-end">Upload File</div>
         <Button
           size="4"
           variant="solid"
@@ -59,7 +51,11 @@ export default function Home() {
           className="hidden"
         />
       </div>
-      <TableComponent />
+      <TableComponent
+        blobList={blobList}
+        setBlobList={setBlobList}
+        fetchBlobList={fetchBlobList}
+      />
     </main>
   );
 }
