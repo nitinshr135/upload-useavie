@@ -34,9 +34,7 @@ const TableComponent = ({ blobList, setBlobList, fetchBlobList }: IProps) => {
 
   const deleteBlob = async (url: string, id: number) => {
     setDeleteLoading({ id: id, loading: true });
-    await del(url, {
-      token: "vercel_blob_rw_jhsn4Jo9S1FYfPvB_1KbCI1CF2tsoCEL6O4S3AArxjM0D8L",
-    });
+    await del(url);
     getFileList();
     setDeleteLoading({ id: id, loading: false });
   };
