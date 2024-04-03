@@ -29,7 +29,6 @@ export default function Home() {
       setfetchBlobList(!fetchBlobList);
     }
   };
-  console.log("yee bloblist --", blobList);
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-24 p-24">

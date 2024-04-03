@@ -45,7 +45,6 @@ const TableComponent = ({ blobList, setBlobList, fetchBlobList }: IProps) => {
     getFileList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchBlobList]);
-  console.log("yee blobo", blobList);
 
   return (
     <div className="w-full">
