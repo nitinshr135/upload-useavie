@@ -25,9 +25,7 @@ const TableComponent = ({ blobList, setBlobList, fetchBlobList }: IProps) => {
 
   const getFileList = async () => {
     setBlobListLoading(true);
-    const { blobs } = await list({
-      token: "vercel_blob_rw_jhsn4Jo9S1FYfPvB_1KbCI1CF2tsoCEL6O4S3AArxjM0D8L",
-    });
+    const { blobs } = await list();
     setBlobList(blobs);
     setBlobListLoading(false);
   };
